@@ -3,6 +3,8 @@ function getSubtotal(items) {
 }
 
 function applyMemberDiscount(member, subtotal) {
+  console.log('member', member)
+  console.log('subtotal', subtotal)
   if (member.role.toLowerCase() === 'gold member') {
     return subtotal - subtotal * 10 / 100
   }
@@ -11,7 +13,7 @@ function applyMemberDiscount(member, subtotal) {
 
 function BookingSummary({ items, member }) {
   const subtotal = getSubtotal(items)
-  const total = applyMemberDiscount(subtotal, member)
+  const total = applyMemberDiscount(member, subtotal)
 
   return (
     <section className="card">
@@ -20,7 +22,7 @@ function BookingSummary({ items, member }) {
         {items.map(item => (
           <li key={item.id}>
             <span>
-              {item.qty} × {item.name}
+              {item.qty} * {item.name}
             </span>
             <span>RM {(item.price * item.qty).toFixed(2)}</span>
           </li>
